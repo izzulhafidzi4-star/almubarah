@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <!-- Viewport & Metadata untuk Aplikasi Web Responsif Mobile-First -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Mubarah / AL - MUBARAH Digital</title>
+
+  <!-- Favicon menggunakan logo utama yang dilampirkan dengan fallback SVG Islami-NW -->
+  <link
+    id="dynamic-favicon"
+    rel="icon"
+    type="image/jpeg"
+    href="21768153_2010541769182048_3982694849959358174_n_2.jpg"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter untuk antarmuka & Amiri + Scheherazade New untuk kaligrafi & teks Arab -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script>
+    // Konfigurasi Tailwind untuk mode gelap berbasis class dan palet zamrud/emas NW
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            arabic: ['"Amiri"', '"Scheherazade New"', 'serif'],
+            naskh: ['"Scheherazade New"', '"Amiri"', 'serif'],
+          },
+          colors: {
+            zamrud: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            emas: {
+              100: '#fef3c7',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+          },
+          boxShadow: {
+            soft: '0 8px 28px -6px rgba(6, 78, 59, 0.08)',
+            card: '0 4px 20px -2px rgba(15, 23, 42, 0.06)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Pengaturan arah dan tipografi teks Arab yang nyaman dibaca */
+    .arabic-text {
+      direction: rtl;
+      unicode-bidi: isolate;
+      font-family: "Amiri", "Scheherazade New", serif;
+      line-height: 2.15;
+    }
+
+    .arabic-size-sm .arabic-text {
+      font-size: 1.35rem;
+    }
+
+    .arabic-size-md .arabic-text {
+      font-size: 1.7rem;
+    }
+
+    .arabic-size-lg .arabic-text {
+      font-size: 2.1rem;
+    }
+
+    /* Pola geometris Islami halus untuk aksen latar belakang */
+    .islamic-pattern {
+      background-image: radial-gradient(rgba(16, 185, 129, 0.09) 1px, transparent 1px),
+        radial-gradient(rgba(217, 119, 6, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .dark .islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.06) 1px, transparent 1px),
+        radial-gradient(rgba(251, 191, 36, 0.05) 1px, transparent 1px);
+    }
+
+    /* Sembunyikan scrollbar pada bar tab horizontal sambil tetap bisa di-scroll */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body
+  id="app-root"
+  class="arabic-size-md min-h-screen bg-stone-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 islamic-pattern"
+>
+  <!-- Pembungkus utama aplikasi dengan error boundary fallback -->
+  <div id="app" class="flex flex-col min-h-screen">
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header
+      class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-emerald-900/10 dark:border-emerald-400/15 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 gap-2 sm:gap-4">
+          <!-- Brand Logo & Judul Aplikasi -->
+          <button
+            type="button"
+            onclick="switchTab('home')"
+            class="flex items-center gap-2.5 sm:gap-3 text-left focus:outline-none group min-w-0"
+            aria-label="Kembali ke Beranda Al-Mubarah / AL- MUBARAH Wathan Digital"
+          >
+            <div
+              class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl overflow-hidden border-2 border-amber-500/70 shadow-sm shrink-0 bg-emerald-950 flex items-center justify-center"
+            >
+              <img
+                src="Gemini_Generated_Image_yi7hd5yi7hd5yi7h.jpg"
+                alt="Logo Al-Mubarah / TPQ AL-MUBARAH Digital"
+                class="w-full h-full object-cover"
+                onerror="handleImageFallback(this, 'Logo NW Al-Mubarah')"
+              />
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-sm sm:text-base tracking-tight text-emerald-900 dark:text-emerald-300 truncate">
+                  Al-Mubarah
+                </span>
+                <span class="hidden md:inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-300/60 dark:border-amber-600/40">
+                  AL - MUBARAH Digital
+                </span>
+              </div>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">
+                Mushalla baiturahmmah Digital • Biografi, Hizib &amp; Barzanji
+              </p>
+            </div>
+          </button>
+
+          <!-- Kolom Pencarian Cepat Lintas Bagian (Desktop & Tablet) -->
+          <div class="hidden md:flex flex-1 max-w-md relative">
+            <span class="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">
+              <!-- Ikon Pencarian -->
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </span>
+            <input
+              id="global-search-desktop"
+              type="search"
+              placeholder="Cari biografi, Hizib NW, Barzanji, qasidah..."
+              oninput="handleGlobalSearch(this.value)"
+              class="w-full pl-9 pr-8 py-2 text-sm rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 dark:focus:ring-emerald-400 transition"
+            />
+            <button
+              type="button"
+              id="clear-search-desktop"
+              onclick="clearGlobalSearch()"
+              title="Hapus pencarian"
+              class="hidden absolute inset-y-0 right-2.5 items-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-1 rounded-lg"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Kontrol Ukuran Huruf Arab & Dark/Light Mode -->
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <!-- Kontrol Ukuran Huruf Arab: Kecil / Sedang / Besar -->
+            <div
+              class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700"
+              role="group"
+              aria-label="Ukuran huruf Arab"
+            >
+              <button
+                type="button"
+                id="font-btn-sm"
+                onclick="setArabicFontSize('sm')"
+                title="Huruf Arab Kecil"
+                class="px-2 py-1 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition"
+              >
+                ع <span class="text-[10px]">K</span>
+              </button>
+              <button
+                type="button"
+                id="font-btn-md"
+                onclick="setArabicFontSize('md')"
+                title="Huruf Arab Sedang"
+                class="px-2 py-1 text-xs font-semibold rounded-lg bg-emerald-700 text-white shadow-xs transition"
+              >
+                ع <span class="text-[10px]">S</span>
+              </button>
+              <button
+                type="button"
+                id="font-btn-lg"
+                onclick="setArabicFontSize('lg')"
+                title="Huruf Arab Besar"
+                class="px-2 py-1 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition"
+              >
+                ع <span class="text-[10px]">B</span>
+              </button>
+            </div>
+
+            <!-- Tombol Toggle Dark / Light Mode -->
+            <button
+              type="button"
+              id="theme-toggle-btn"
+              onclick="toggleDarkMode()"
+              aria-label="Ganti Mode Gelap atau Terang"
+              title="Mode Gelap / Terang"
+              class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 border border-slate-200 dark:border-slate-700 transition"
+            >
+              <!-- Ikon Bulan (tampil di Light Mode) -->
+              <svg id="icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              <!-- Ikon Matahari (tampil di Dark Mode) -->
+              <svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bar Pencarian Mobile -->
+        <div class="pb-3 md:hidden">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </span>
+            <input
+              id="global-search-mobile"
+              type="search"
+              placeholder="Cari di Biografi, Hizib NW, Barzanji &amp; Qasidah..."
+              oninput="handleGlobalSearch(this.value)"
+              class="w-full pl-9 pr-8 py-2 text-sm rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 dark:focus:ring-emerald-400 transition"
+            />
+            <button
+              type="button"
+              id="clear-search-mobile"
+              onclick="clearGlobalSearch()"
+              class="hidden absolute inset-y-0 right-2.5 items-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-1 rounded-lg"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigasi Tab Utama (Beranda, Biografi, Hizib NW, Barzanji & Qasidah, Galeri & File) -->
+        <nav
+          aria-label="Navigasi Bagian Utama"
+          class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-2.5 pt-0.5"
+        >
+          <button
+            type="button"
+            data-tab="home"
+            onclick="switchTab('home')"
+            class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5"
+          >
+            <span>Beranda</span>
+          </button>
+          <button
+            type="button"
+            data-tab="biografi"
+            onclick="switchTab('biografi')"
+            class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5"
+          >
+            <span>1. Biografi</span>
+          </button>
+          <button
+            type="button"
+            data-tab="hizib"
+            onclick="switchTab('hizib')"
+            class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5"
+          >
+            <span>2. Hizib NW</span>
+          </button>
+          <button
+            type="button"
+            data-tab="barzanji"
+            onclick="switchTab('barzanji')"
+            class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5"
+          >
+            <span>3. Al-Barzanji &amp; Qasidah</span>
+          </button>
+          <button
+            type="button"
+            data-tab="galeri"
+            onclick="switchTab('galeri')"
+            class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5"
+          >
+            <span>4. Galeri &amp; File</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Notifikasi Toast / Message Box (Pengganti alert) -->
+    <div
+      id="toast-box"
+      role="status"
+      aria-live="polite"
+      class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-emerald-900 text-white dark:bg-emerald-800 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-medium flex items-center gap-2.5"
+    >
+      <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+      <span id="toast-message">Pemberitahuan</span>
+    </div>
+
+    <!-- ==================== KONTEN UTAMA ==================== -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
+      <!-- Panel Hasil Pencarian Lintas Bagian (Muncul saat kata kunci pencarian aktif) -->
+      <section
+        id="search-results-panel"
+        class="hidden mb-7 bg-white dark:bg-slate-900 rounded-3xl border border-amber-400/50 dark:border-amber-500/30 shadow-card p-4 sm:p-6"
+      >
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100 dark:border-slate-800">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-emerald-900 dark:text-emerald-300">
+              Hasil Pencarian Lintas Bagian
+            </h2>
+            <p id="search-summary-text" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400"></p>
+          </div>
+          <button
+            type="button"
+            onclick="clearGlobalSearch()"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition"
+          >
+            Tutup Pencarian
+          </button>
+        </div>
+        <div id="search-results-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+      </section>
+
+      <!-- ==================== BAGIAN 0: BERANDA (HOME) ==================== -->
+      <section id="tab-home" class="tab-panel space-y-6 sm:space-y-8">
+        <!-- Hero Card Identitas Aplikasi & Logo Utama -->
+        <div
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-950 text-white shadow-soft border border-amber-400/30 p-5 sm:p-8 lg:p-10"
+        >
+          <div class="relative z-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+            <!-- Brand Mark / Logo Utama -->
+            <div class="flex flex-col items-center text-center shrink-0">
+              <div
+                class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl overflow-hidden border-4 border-amber-400/80 shadow-2xl bg-emerald-950 flex items-center justify-center"
+              >
+                <img
+                  src="Gemini_Generated_Image_yi7hd5yi7hd5yi7h.jpg"
+                  alt="Logo Utama Al-Mubarah / Nahdlatul Wathan Digital"
+                  class="w-full h-full object-cover"
+                  onerror="handleImageFallback(this, 'Logo Al-Mubarah / NW')"
+                />
+              </div>
+              <span class="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wide uppercase px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-300/30">
+                TPQ Al-Mubarah • NWDI
+              </span>
+            </div>
+
+            <!-- Teks Sambutan & Ringkasan Aplikasi -->
+            <div class="flex-1 text-center lg:text-left space-y-3">
+              <p class="arabic-text text-amber-300 text-xl sm:text-2xl">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • نَهْضَةُ الْوَطَنِ الدِّينِيَّةُ الْإِسْلَامِيَّةُ
+              </p>
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
+                Al-Mubarah / Nahdlatul Wathan Digital
+              </h1>
+              <p class="text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+                Pusat arsip digital terpadu untuk menelusuri <strong>Biografi Singkat Al-Ustadz Abu Shulhi</strong> (Pendiri TPQ Al Mubarah), wirid dan doa <strong>Hizib Nahdlatul Wathan</strong> karya Maulana Syeikh TGKH. Muhammad Zainuddin Abdul Majid, serta bacaan <strong>Kitab Al-Barzanji, Mahallul Qiyam &amp; Qasidah</strong>
+              </p>
+
+              <!-- Tombol Aksi Cepat ke Empat Bagian -->
+              <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-2.5">
+                <button
+                  type="button"
+                  onclick="switchTab('biografi')"
+                  class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold text-xs sm:text-sm shadow-md transition"
+                >
+                  Baca Biografi Abu Shulhi
+                </button>
+                <button
+                  type="button"
+                  onclick="switchTab('hizib')"
+                  class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm border border-white/20 transition"
+                >
+                  Buka Hizib NW &amp; Tasbih
+                </button>
+                <button
+                  type="button"
+                  onclick="switchTab('barzanji')"
+                  class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm border border-white/20 transition"
+                >
+                  Al-Barzanji &amp; Qasidah
+                </button>
+                <button
+                  type="button"
+                  onclick="switchTab('galeri')"
+                  class="px-4 py-2.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-950/80 text-emerald-100 font-semibold text-xs sm:text-sm border border-emerald-400/30 transition"
+                >
+                  Galeri &amp; Pemetaan File
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kartu Navigasi 4 Bagian Utama -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <button
+            type="button"
+            onclick="switchTab('biografi')"
+            class="text-left bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-emerald-600 dark:hover:border-emerald-400 shadow-card transition group flex flex-col justify-between"
+          >
+            <div>
+              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 mb-3">
+                BIOGRAFI SINGKAT_2.docx
+              </span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition">
+                Al-Ustadz Abu Shulhi
+              </h2>
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Pendiri TPQ Al Mubarah, perjalanan menuntut ilmu di Nurul Iman &amp; NWDI Pancor, serta pengabdian di Tembeng Putik dan Desa Teko.
+              </p>
+            </div>
+            <span class="mt-4 text-xs font-semibold text-emerald-700 dark:text-emerald-400 inline-flex items-center gap-1">
+              Buka Biografi &rarr;
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchTab('hizib')"
+            class="text-left bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-emerald-600 dark:hover:border-emerald-400 shadow-card transition group flex flex-col justify-between"
+          >
+            <div>
+              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 mb-3">
+                HIZIB Nahdlatul Wathan_2.pdf
+              </span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition">
+                Hizib Nahdlatul Wathan
+              </h2>
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Sambutan Penerbit, Wasiat Renungan Masa, Miftah/Fatihah, Surah Yasin, Shalawat As-Sitt, Ikhtisharu Hizbi NW &amp; penghitung ulangan.
+              </p>
+            </div>
+            <span class="mt-4 text-xs font-semibold text-emerald-700 dark:text-emerald-400 inline-flex items-center gap-1">
+              Buka Hizib NW &rarr;
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchTab('barzanji')"
+            class="text-left bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-emerald-600 dark:hover:border-emerald-400 shadow-card transition group flex flex-col justify-between"
+          >
+            <div>
+              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300 mb-3">
+                Albarzanji_2.pdf
+              </span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition">
+                Kitab Al-Barzanji &amp; Qasidah
+              </h2>
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Pembuka Fatihah &amp; Shalatun Nahdlatain, Maulid Barzanji, Mahallul Qiyam, puluhan Qasidah pilihan, hingga Fihrisul Kitab.
+              </p>
+            </div>
+            <span class="mt-4 text-xs font-semibold text-emerald-700 dark:text-emerald-400 inline-flex items-center gap-1">
+              Buka Kitab &amp; Qasidah &rarr;
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchTab('galeri')"
+            class="text-left bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-emerald-600 dark:hover:border-emerald-400 shadow-card transition group flex flex-col justify-between"
+          >
+            <div>
+              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200 mb-3">
+                Aset Gambar &amp; Arsip
+              </span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition">
+                Galeri &amp; Pemetaan File
+              </h2>
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Pratinjau gambar lampiran (logo utama &amp; ilustrasi) serta pemetaan lengkap seluruh dokumen lampiran ke dalam menu aplikasi.
+              </p>
+            </div>
+            <span class="mt-4 text-xs font-semibold text-emerald-700 dark:text-emerald-400 inline-flex items-center gap-1">
+              Buka Galeri &amp; File &rarr;
+            </span>
+          </button>
+        </div>
+
+        <!-- Pratinjau Cepat Galeri Aset Gambar pada Beranda -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-emerald-900 dark:text-emerald-300">
+                Pratinjau Aset Visual Lampiran
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                Gambar logo aplikasi dan ilustrasi pendukung yang terintegrasi dalam sistem.
+              </p>
+            </div>
+            <button
+              type="button"
+              onclick="switchTab('galeri')"
+              class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
+            >
+              Lihat Detail Pemetaan File
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950/60 flex flex-col sm:flex-row">
+              <div class="w-full sm:w-40 h-44 sm:h-auto shrink-0 bg-emerald-950 flex items-center justify-center overflow-hidden">
+                <img
+                  src="21768153_2010541769182048_3982694849959358174_n_2.jpg"
+                  alt="Logo Utama 21768153_2010541769182048_3982694849959358174_n_2.jpg"
+                  class="w-full h-full object-cover"
+                  onerror="handleImageFallback(this, 'Logo Utama NW / Al-Mubarah')"
+                />
+              </div>
+              <div class="p-4 flex flex-col justify-between space-y-2">
+                <div>
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
+                    Logo Utama Aplikasi
+                  </span>
+                  <h3 class="font-bold text-sm mt-1.5 break-all text-slate-900 dark:text-white">
+                    21768153_2010541769182048_3982694849959358174_n_2.jpg
+                  </h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                    Digunakan sebagai logo header, favicon, hero brand mark, dan kartu identitas utama.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950/60 flex flex-col sm:flex-row">
+              <div class="w-full sm:w-40 h-44 sm:h-auto shrink-0 bg-emerald-950 flex items-center justify-center overflow-hidden">
+                <img
+                  src="Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg"
+                  alt="Ilustrasi Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg"
+                  class="w-full h-full object-cover"
+                  onerror="handleImageFallback(this, 'Ilustrasi Al-Mubarah / NW')"
+                />
+              </div>
+              <div class="p-4 flex flex-col justify-between space-y-2">
+                <div>
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+                    Aset Ilustrasi Pendukung
+                  </span>
+                  <h3 class="font-bold text-sm mt-1.5 break-all text-slate-900 dark:text-white">
+                    Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg
+                  </h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                    Aset gambar pendukung yang ditampilkan pada galeri visual dan arsip media aplikasi.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 1: BIOGRAFI SINGKAT ==================== -->
+      <section id="tab-biografi" class="tab-panel hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-8">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-4">
+              <img
+                src="21768153_2010541769182048_3982694849959358174_n.jpg"
+                alt="Logo Al-Mubarah"
+                class="w-14 h-14 rounded-2xl object-cover border-2 border-amber-400/70 shrink-0"
+                onerror="handleImageFallback(this, 'Al-Mubarah')"
+              />
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  Sumber: BIOGRAFI SINGKAT_2.docx
+                </span>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-0.5">
+                  Biografi Singkat Al-Ustadz Abu Shulhi
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  Pendiri TPQ Al Mubarah • Pengabdian Ilmu Alat, Madrasah, Mushalla &amp; Dakwah Keliling
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onclick="copySectionText('biografi-content', 'Biografi Al-Ustadz Abu Shulhi')"
+              class="self-start md:self-auto px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
+            >
+              Salin Teks Biografi
+            </button>
+          </div>
+
+          <div id="biografi-content" class="mt-6 space-y-6 text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
+            <!-- Sorotan Poin Utama -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-4 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/70 dark:border-emerald-800/50">
+                <p class="text-xs font-bold uppercase text-emerald-800 dark:text-emerald-300">Lembaga &amp; Peran</p>
+                <p class="font-bold text-slate-900 dark:text-white mt-1">Pendiri TPQ Al Mubarah</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                  Membina generasi Qur'ani dan mendidik santri secara langsung dengan keteladanan.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/70 dark:border-amber-800/40">
+                <p class="text-xs font-bold uppercase text-amber-800 dark:text-amber-300">Jejak Pesantren</p>
+                <p class="font-bold text-slate-900 dark:text-white mt-1">Nurul Iman &amp; NWDI Pancor</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                  Menimba ilmu di Ponpes Nurul Iman (Mamben Lauk) dan YPH PPD NWDI Pancor.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-teal-50/80 dark:bg-teal-950/30 border border-teal-200/70 dark:border-teal-800/40">
+                <p class="text-xs font-bold uppercase text-teal-800 dark:text-teal-300">Keilmuan &amp; Ketekunan</p>
+                <p class="font-bold text-slate-900 dark:text-white mt-1">Ilmu &amp; Kitab Tulisan</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                  Nahwu, sharaf, balaghah, fiqh, dan tajwid; menulis kitab tangan sendiri &amp; berjalan kaki ke Desa Teko.
+                </p>
+              </div>
+            </div>
+
+            <!-- Narasi Lengkap Biografi -->
+            <div class="space-y-4">
+              <h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-300">
+                1. Masa Pendidikan &amp; Perguruan Masyaikh
+              </h2>
+              <p>
+                <strong>Al-Ustadz Abu Shulhi</strong> merupakan sosok pendidik dan pengabdi ilmu yang dikenal atas kesederhanaan, ketekunan, serta kecintaannya pada kitab kuning dan pengajaran Al-Qur'an hingga mendirikan <strong>TPQ Al Mubarah</strong>. Sejak awal menapaki jalan tholabul 'ilmi, beliau menimba ilmu di <strong>Pondok Pesantren Nurul Iman (Mamben Lauk)</strong> dan berguru kepada para ulama panutan, di antaranya:
+              </p>
+              <ul class="list-disc pl-5 space-y-1.5 marker:text-emerald-600 dark:marker:text-emerald-400">
+                <li><strong>Alm. TGH. Khairuddin (As-Shaulaty)</strong></li>
+                <li><strong>Alm. Ust. H. Marzuki Khair An-Nahdly</strong></li>
+                <li><strong>Alm. TGH. M. Amin</strong></li>
+                <li><strong>Alm. TGH. M. Sholeh</strong></li>
+              </ul>
+              <p>
+                Perjalanan keilmuan beliau kemudian berlanjut ke <strong>YPH PPD NWDI Pancor</strong> di bawah bimbingan langsung <strong>Maulana Syeikh TGKH. M. Zainuddin Abdul Madjid</strong>, yang semakin mengokohkan fondasi keilmuan, semangat ke-NW-an, dan etos pengabdian dakwah serta pendidikan Islam.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-300">
+                2. Pengabdian di Madrasah, Mushalla, Desa Tembeng Putik &amp; Desa Teko
+              </h2>
+              <p>
+                Sepulang menuntut ilmu, Al-Ustadz Abu Shulhi mendedikasikan hidupnya untuk mengajar di <strong>madrasah</strong>, membina jamaah di <strong>mushalla</strong>, serta mengisi <strong>pengajian keliling di Desa Tembeng Putik</strong>.
+              </p>
+              <p>
+                Salah satu potret keteladanan beliau yang paling membekas adalah saat <strong>mengajar pertama kali di Desa Teko, Kec. Pringgabaya dengan berjalan kaki</strong>. Di tengah keterbatasan sarana dan jarak tempuh, beliau tetap istiqamah menyampaikan ilmu kepada masyarakat dan para santri.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-300">
+                3. Menulis Kitab Tangan Sendiri &amp; Pengajaran Ilmu Alat
+              </h2>
+              <p>
+                Selain mengajar secara langsung, beliau juga dikenal rajin <strong>menulis kitab tangan sendiri</strong> sebagai bahan ajar dan catatan keilmuan. Dalam majelis pendidikan dan pengajiannya, Al-Ustadz Abu Shulhi menekankan penguasaan <strong>ilmu alat</strong> dan cabang ilmu keislaman pokok, meliputi:
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100/80 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200">
+                  Nahwu
+                </span>
+                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100/80 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200">
+                  Sharaf
+                </span>
+                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100/80 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200">
+                  Balaghah
+                </span>
+                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100/80 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200">
+                  Fiqh
+                </span>
+                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100/80 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200">
+                  Tajwid
+                </span>
+              </div>
+              <p>
+                Melalui <strong>TPQ Al Mubarah</strong> dan tradisi pengajaran yang beliau wariskan, nilai keikhlasan, kemandirian, serta kecintaan terhadap ilmu syar'i terus hidup dan menjadi teladan bagi murid-murid serta masyarakat luas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 2: HIZIB NAHDLATUL WATHAN ==================== -->
+      <section id="tab-hizib" class="tab-panel hidden space-y-6">
+        <!-- Header & Tasbih / Penghitung Bacaan -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100 dark:border-slate-800">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                Sumber: HIZIB Nahdlatul Wathan_2.pdf
+              </span>
+              <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Hizib Nahdlatul Wathan
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+                Karya Maulana Syeikh TGKH. Muhammad Zainuddin Abdul Majid • Pengurus Besar Nahdlatul Wathan, Pancor Selong Lombok Timur NTB
+              </p>
+            </div>
+
+            <!-- Widget Penghitung Tasbih / Ulangan Bacaan -->
+            <div class="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-3.5 flex flex-wrap items-center gap-3">
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                  Penghitung Bacaan (Tasbih)
+                </p>
+                <p id="tasbih-label" class="text-xs text-slate-600 dark:text-slate-400">
+                  Ulangan Bebas / 3x (Tsalatsan)
+                </p>
+              </div>
+              <div class="flex items-center gap-2 ml-auto">
+                <button
+                  type="button"
+                  onclick="decrementTasbih()"
+                  class="w-9 h-9 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                  aria-label="Kurangi hitungan"
+                >
+                  &minus;
+                </button>
+                <span
+                  id="tasbih-count"
+                  class="min-w-[3rem] text-center text-lg font-extrabold text-emerald-900 dark:text-emerald-300 tabular-nums"
+                >
+                  0
+                </span>
+                <button
+                  type="button"
+                  onclick="incrementTasbih()"
+                  class="px-4 h-9 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm shadow-xs transition"
+                  aria-label="Tambah hitungan bacaan"
+                >
+                  + Hitung
+                </button>
+                <button
+                  type="button"
+                  onclick="resetTasbih()"
+                  class="px-2.5 h-9 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-300 font-semibold text-xs hover:bg-amber-200 transition"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigasi Cepat Sub-Bagian Hizib NW -->
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a href="#hizib-sambutan" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition">
+              Sambutan &amp; Wasiat
+            </a>
+            <a href="#hizib-miftah" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition">
+              Miftah / Fatihah (a, b, c)
+            </a>
+            <a href="#hizib-yasin" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition">
+              Surah Yasin (Pilihan)
+            </a>
+            <a href="#hizib-shalawat" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition">
+              Shalawat As-Sitt
+            </a>
+            <a href="#hizib-ikhtisharu" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition">
+              Ikhtisharu Hizbi NW &amp; Doa
+            </a>
+          </div>
+        </div>
+
+        <!-- 1. Sambutan Penerbit & Wasiat Renungan Masa -->
+        <article
+          id="hizib-sambutan"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-4"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="text-lg sm:text-xl font-bold text-emerald-900 dark:text-emerald-300">
+              Sambutan Penerbit &amp; Kutipan Wasiat Renungan Masa
+            </h2>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+              PB Nahdlatul Wathan • Pancor, Selong, Lombok Timur, NTB
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <strong>Hizib Nahdlatul Wathan</strong> disusun oleh <strong>Maulana Syeikh TGKH. Muhammad Zainuddin Abdul Majid</strong> sebagai wirid, tawajjuh, dzikir, dan doa perlindungan serta keberkahan perjuangan jam'iyah dan jamaah Nahdlatul Wathan di bawah naungan <strong>Pengurus Besar Nahdlatul Wathan (Pancor Selong, Lombok Timur, NTB)</strong>.
+          </p>
+
+          <blockquote class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50 to-amber-50/70 dark:from-emerald-950/50 dark:to-amber-950/30 border-l-4 border-amber-500 space-y-2">
+            <p class="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+              Kutipan Wasiat Renungan Masa
+            </p>
+            <p class="text-sm sm:text-base font-semibold text-emerald-950 dark:text-emerald-100 italic leading-relaxed">
+              &ldquo;Sebarkanlah Hizib Hingga Merata...&rdquo;
+            </p>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Pesan dalam <em>Wasiat Renungan Masa</em> menegaskan agar warga dan santri Nahdlatul Wathan mengamalkan serta menyebarkan Hizib Nahdlatul Wathan secara merata dengan penuh keikhlasan, adab, dan istiqamah sebagai benteng spiritual dalam berkhidmat kepada agama, bangsa, dan negara.
+            </p>
+          </blockquote>
+        </article>
+
+        <!-- 2. Miftah / Qira'atul Fatihah (a, b, c) -->
+        <article
+          id="hizib-miftah"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-5"
+        >
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+              Pembuka Wirid
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+              Miftah / Qira&apos;atul Fatihah (a, b, c)
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                  Bagian (a)
+                </span>
+                <button
+                  type="button"
+                  onclick="setTasbihTarget(1, 'Fatihah (a) — 1x')"
+                  class="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline"
+                >
+                  Catat 1x
+                </button>
+              </div>
+              <p class="font-semibold text-sm text-slate-900 dark:text-white">
+                Qira&apos;atul Fatihah — Hadhrah Nabi Muhammad SAW &amp; Muallif Hizib
+              </p>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ۝ آمِين
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Diawali tawajjuh dan pembacaan Surah Al-Fatihah untuk Rasulullah SAW, keluarga, sahabat, para guru, dan penyusun Hizib Nahdlatul Wathan.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                  Bagian (b)
+                </span>
+                <button
+                  type="button"
+                  onclick="setTasbihTarget(1, 'Fatihah (b) — 1x')"
+                  class="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline"
+                >
+                  Catat 1x
+                </button>
+              </div>
+              <p class="font-semibold text-sm text-slate-900 dark:text-white">
+                Qira&apos;atul Fatihah — Auliya, Masyaikh &amp; Pendiri NWDI/NBDI/NW
+              </p>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَصَحْبِهِ وَمَشَايِخِنَا وَمُعَلِّمِينَا وَخُصُوصًا إِمَامِنَا وَمُرَبِّينَا مَوْلَانَا الشَّيْخِ زَيْنِ الدِّينِ عَبْدِ الْمَجِيدِ الْفَاتِحَة
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Menghadiahkan bacaan Fatihah kepada para ulama salaf, guru-guru pesantren, dan Maulana Syeikh TGKH. M. Zainuddin Abdul Majid.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                  Bagian (c)
+                </span>
+                <button
+                  type="button"
+                  onclick="setTasbihTarget(1, 'Fatihah (c) — 1x')"
+                  class="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline"
+                >
+                  Catat 1x
+                </button>
+              </div>
+              <p class="font-semibold text-sm text-slate-900 dark:text-white">
+                Qira&apos;atul Fatihah — Keluarga, Kaum Muslimin &amp; Hajat Perjuangan
+              </p>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                ثُمَّ إِلَى أَرْوَاحِ آبَائِنَا وَأُمَّهَاتِنَا وَمَشَايِخِنَا وَذَوِي الْحُقُوقِ عَلَيْنَا وَجَمِيعِ الْمُسْلِمِينَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ الْفَاتِحَة
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Memohonkan rahmat, maghfirah, dan terkabulnya segala hajat kebaikan bagi orang tua, guru, kaum mukminin, serta kelangsungan Nahdlatul Wathan.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Surah Yasin (Ayat-Ayat Pilihan dalam Teks PDF) -->
+        <article
+          id="hizib-yasin"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-4"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                Tilawah Pilihan
+              </span>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Surah Yasin (Ayat-Ayat Pilihan dalam Hizib NW)
+              </h2>
+            </div>
+            <button
+              type="button"
+              onclick="setTasbihTarget(3, 'Surah Yasin / Ayat Pilihan (Tsalatsan 3x)')"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200 hover:bg-amber-200 transition"
+            >
+              Set Tasbih: Tsalatsan (3x)
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300">Yasin Ayat 1–9</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 font-semibold">
+                  Pembuka &amp; Perlindungan
+                </span>
+              </div>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                يس ۝ وَالْقُرْآنِ الْحَكِيمِ ۝ إِنَّكَ لَمِنَ الْمُرْسَلِينَ ۝ عَلَىٰ صِرَاطٍ مُسْتَقِيمٍ ۝ تَنزِيلَ الْعَزِيزِ الرَّحِيمِ ۝ لِتُنذِرَ قَوْمًا مَّا أُنذِرَ آبَاؤُهُمْ فَهُمْ غَافِلُونَ ۝ لَقَدْ حَقَّ الْقَوْلُ عَلَىٰ أَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُونَ ۝ إِنَّا جَعَلْنَا فِي أَعْنَاقِهِمْ أَغْلَالًا فَهِيَ إِلَى الْأَذْقَانِ فَهُم مُّقْمَحُونَ ۝ وَجَعَلْنَا مِن بَيْنِ أَيْدِيهِمْ سَدًّا وَمِنْ خَلْفِهِمْ سَدًّا فَأَغْشَيْنَاهُمْ فَهُمْ لَا يُبْصِرُونَ ۝
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Ayat-ayat pembuka Surah Yasin yang sarat makna kerasulan, jalan lurus, dan penjagaan Allah SWT dari segala marabahaya.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300">Yasin Ayat 58 &amp; Penutup (76–83)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-300 font-semibold">
+                  Salamun Qaulan &amp; Kekuasaan Allah
+                </span>
+              </div>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                سَلَامٌ قَوْلًا مِّن رَّبٍّ رَّحِيمٍ ۝ ... فَسُبْحَانَ الَّذِي بِيَدِهِ مَلَكُوتُ كُلِّ شَيْءٍ وَإِلَيْهِ تُرْجَعُونَ ۝
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Mengagungkan salam dari Tuhan Yang Maha Penyayang serta kesempurnaan kekuasaan Allah atas segala sesuatu.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Qira'atush Shalawat As-Sitt (6 Shalawat) -->
+        <article
+          id="hizib-shalawat"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-5"
+        >
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+              Enam Shalawat Pilihan
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+              Qira&apos;atush Shalawat As-Sitt
+            </h2>
+          </div>
+
+          <div id="shalawat-as-sitt-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </article>
+
+        <!-- 5. Ikhtisharu Hizbi Nahdlatil Wathan & Doa-Doa -->
+        <article
+          id="hizib-ikhtisharu"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-5"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                Ringkasan &amp; Doa Penutup
+              </span>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Ikhtisharu Hizbi Nahdlatil Wathan &amp; Doa-Doa
+              </h2>
+            </div>
+            <button
+              type="button"
+              onclick="setTasbihTarget(3, 'Ikhtisharu Hizbi NW — Tsalatsan (3x)')"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200 transition"
+            >
+              Set Tasbih: Tsalatsan (3x)
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
+                  Ikhtisharu Hizbi Nahdlatil Wathan (Tsalatsan / 3x)
+                </h3>
+                <button
+                  type="button"
+                  onclick="incrementTasbih()"
+                  class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-700 text-white hover:bg-emerald-600 transition"
+                >
+                  Hitung Bacaan (+1)
+                </button>
+              </div>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ اللَّهُمَّ إِنَّا نَسْتَحْفِظُكَ وَنَسْتَوْدِعُكَ أَدْيَانَنَا وَأَنْفُسَنَا وَأَمْوَالَنَا وَأَهْلَنَا وَكُلَّ شَيْءٍ أَعْطَيْتَنَا، اللَّهُمَّ اجْعَلْنَا وَإِيَّاهُمْ فِي كَنَفِكَ وَأَمَانِكَ وَعِيَاذِكَ وَجِوَارِكَ مِنْ كُلِّ شَيْطَانٍ مَرِيدٍ وَجَبَّارٍ عَنِيدٍ وَذِي عَيْنٍ وَذِي بَغْيٍ وَمِنْ شَرِّ كُلِّ ذِي شَرٍّ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ۝
+              </p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                Memohon kepada Allah SWT penjagaan agama, diri, harta, keluarga, serta seluruh karunia-Nya dalam naungan kasih sayang dan keamanan Ilahi (dibaca berulang sesuai petunjuk / <em>tsalatsan</em>).
+              </p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
+                Doa-Doa Hizib Nahdlatul Wathan (Hidayah, Ilmu Bermanfaat, Kebahagiaan &amp; Keberkahan NW)
+              </h3>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">
+                اللَّهُمَّ انْفَعْنَا بِمَا عَلَّمْتَنَا وَعَلِّمْنَا مَا يَنْفَعُنَا وَارْزُقْنَا فَهْمًا فِي الدِّينِ، اللَّهُمَّ أَصْلِحْ لَنَا شَأْنَنَا كُلَّهُ بِرِضَاكَ وَأَسْعِدْ قُلُوبَنَا وَاقْضِ عَنَّا دُيُونَنَا قَبْلَ أَنْ يَأْتِيَنَا مَلَكُ الْمَوْتِ، اللَّهُمَّ اغْفِرْ لَنَا ذُنُوبَنَا إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ، وَأَعْلِ رَايَةَ نَهْضَةِ الْوَطَنِ وَاحْفَظْهَا وَقَادَتَهَا آمِين ۝
+              </p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                Rangkaian doa memohon ilmu yang bermanfaat, pemahaman agama, perbaikan keadaan lahir batin, pelunasan tanggungan, ampunan dosa, serta kejayaan dan keselamatan perjuangan Nahdlatul Wathan.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==================== BAGIAN 3: KITAB AL-BARZANJI & QASIDAH ==================== -->
+      <section id="tab-barzanji" class="tab-panel hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                Sumber: Albarzanji_2.pdf
+              </span>
+              <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Kitab Al-Barzanji, Mahallul Qiyam &amp; Qasidah
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+                Memuat pembuka Fatihah &amp; Shalatun Nahdlatain, Maulid Barzanji, Mahallul Qiyam, Ad-Du&apos;a, kumpulan Qasidah &amp; Shalawat, hingga Fihrisul Kitab.
+              </p>
+            </div>
+
+            <!-- Filter Pencarian Khusus Barzanji & Qasidah -->
+            <div class="w-full md:w-72">
+              <input
+                id="barzanji-filter-input"
+                type="search"
+                placeholder="Filter bab / judul qasidah..."
+                oninput="filterBarzanjiItems(this.value)"
+                class="w-full px-3.5 py-2 text-sm rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 dark:focus:ring-emerald-400 transition"
+              />
+            </div>
+          </div>
+
+          <!-- Navigasi Cepat Lompat Bab / Qasidah -->
+          <div id="barzanji-quick-nav" class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800"></div>
+        </div>
+
+        <!-- Daftar Bab Al-Barzanji & Kumpulan Qasidah -->
+        <div id="barzanji-items-container" class="space-y-4"></div>
+
+        <!-- Fihrisul Kitab (Daftar Isi Terstruktur) -->
+        <article
+          id="fihrisul-kitab"
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-amber-300/70 dark:border-amber-700/50 shadow-card p-5 sm:p-7 space-y-4"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300">
+                Daftar Isi Kitab &amp; Kumpulan Syair
+              </span>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Fihrisul Kitab (فهرس الكتاب)
+              </h2>
+            </div>
+            <span class="arabic-text text-emerald-800 dark:text-emerald-300 text-xl font-bold">
+              فِهْرِسُ الْكِتَابِ
+            </span>
+          </div>
+          <div id="fihris-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5"></div>
+        </article>
+      </section>
+
+      <!-- ==================== BAGIAN 4: GALERI & PEMETAAN FILE ==================== -->
+      <section id="tab-galeri" class="tab-panel hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-8 space-y-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+              Arsip Media &amp; Struktur Dokumen
+            </span>
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-0.5">
+              Galeri Aset Gambar &amp; Pemetaan File Lampiran
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+              Seluruh file yang disertakan telah dikelompokkan secara sistematis ke dalam bagian-bagian aplikasi Al-Mubarah / Nahdlatul Wathan Digital.
+            </p>
+          </div>
+
+          <!-- Galeri Pratinjau Gambar Lampiran -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Gambar 1: Logo Utama -->
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950/60 shadow-xs">
+              <div class="aspect-[16/10] w-full bg-emerald-950 flex items-center justify-center overflow-hidden">
+                <img
+                  src="21768153_2010541769182048_3982694849959358174_n_2.jpg"
+                  alt="21768153_2010541769182048_3982694849959358174_n_2.jpg"
+                  class="w-full h-full object-contain bg-emerald-950"
+                  onerror="handleImageFallback(this, 'Logo Utama NW / Al-Mubarah')"
+                />
+              </div>
+              <div class="p-4 sm:p-5 space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
+                    Logo Aplikasi Utama
+                  </span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400">JPG • Brand Mark</span>
+                </div>
+                <h2 class="font-bold text-sm sm:text-base break-all text-slate-900 dark:text-white">
+                  21768153_2010541769182048_3982694849959358174_n_2.jpg
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  Digunakan pada bilah navigasi (header), favicon aplikasi, kartu hero beranda, kartu biografi, dan galeri media.
+                </p>
+              </div>
+            </div>
+
+            <!-- Gambar 2: Ilustrasi Pendukung -->
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950/60 shadow-xs">
+              <div class="aspect-[16/10] w-full bg-emerald-950 flex items-center justify-center overflow-hidden">
+                <img
+                  src="Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg"
+                  alt="Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg"
+                  class="w-full h-full object-contain bg-emerald-950"
+                  onerror="handleImageFallback(this, 'Ilustrasi Gemini Al-Mubarah')"
+                />
+              </div>
+              <div class="p-4 sm:p-5 space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+                    Aset Ilustrasi Media
+                  </span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400">JPG • Galeri Visual</span>
+                </div>
+                <h2 class="font-bold text-sm sm:text-base break-all text-slate-900 dark:text-white">
+                  Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  Ditampilkan sebagai aset visual pendukung pada pratinjau beranda serta galeri media aplikasi.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabel Pemetaan Seluruh File Lampiran -->
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-emerald-900 text-white">
+                  <th class="py-3 px-4 font-bold">Nama File Lampiran</th>
+                  <th class="py-3 px-4 font-bold">Menu / Tab Tujuan</th>
+                  <th class="py-3 px-4 font-bold">Cakupan Konten Terstruktur</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-900">
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold break-all text-slate-900 dark:text-white">
+                    BIOGRAFI SINGKAT_2.docx
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <button type="button" onclick="switchTab('biografi')" class="font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">
+                      1. Biografi
+                    </button>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                    Biografi Al-Ustadz Abu Shulhi (Pendiri TPQ Al Mubarah), pendidikan di Nurul Iman (Mamben Lauk) bersama Alm. TGH. Khairuddin (As-Shaulaty), Alm. Ust. H. Marzuki Khair An-Nahdly, Alm. TGH. M. Amin, Alm. TGH. M. Sholeh; lanjut ke YPH PPD NWDI Pancor di bawah Maulana Syeikh TGKH. M. Zainuddin Abdul Madjid; pengabdian di madrasah, mushalla, pengajian keliling di Desa Tembeng Putik, mengajar pertama kali di Desa Teko Kec. Pringgabaya dengan berjalan kaki, menulis kitab tangan sendiri, serta mengajar nahwu, sharaf, balaghah, fiqh, dan tajwid.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold break-all text-slate-900 dark:text-white">
+                    HIZIB Nahdlatul Wathan_2.pdf
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <button type="button" onclick="switchTab('hizib')" class="font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">
+                      2. Hizib NW
+                    </button>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                    Sambutan Penerbit (PB NW Pancor Selong Lombok Timur NTB), kutipan Wasiat Renungan Masa (&ldquo;Sebarkanlah Hizib Hingga Merata...&rdquo;), Miftah / Qira&apos;atul Fatihah (a, b, c), Surah Yasin pilihan, Qira&apos;atush Shalawat As-Sitt, Ikhtisharu Hizbi Nahdlatil Wathan &amp; doa-doa, lengkap dengan tasbih ulangan.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold break-all text-slate-900 dark:text-white">
+                    Albarzanji_2.pdf
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <button type="button" onclick="switchTab('barzanji')" class="font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">
+                      3. Al-Barzanji &amp; Qasidah
+                    </button>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                    Qira&apos;atul Fatihah, Shalatun Nahdlatain, bait-bait Maulid Al-Barzanji, Mahallul Qiyam, Ad-Du&apos;a, kumpulan Qasidah &amp; Shalawat (Badriyyah, Ya Rabbi Shalli &apos;Ala Muhammad, Assalamu &apos;Alaik, Nuurul Mushthofa, Ya Thaybah, Khoirol Bariyyah, Alfu Shollallah, Al-Madad Ya Rasulullah, Ghuraba, Hayatul Ruh, Syaikhona, Ad-Diinu Lana, Ya Syahidan, Ya Khoiro Maulud, Thola&apos;al Badru, Sholatun Bissalamil Mubin, As&apos;adul Ayyam, Ya Habibal Qolbi, Innal Habibal Mushthofa, Burdah, Asmaul Husna, Qiyam, Doa Pusaka), dan Fihrisul Kitab.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold break-all text-slate-900 dark:text-white">
+                    21768153_2010541769182048_3982694849959358174_n_2.jpg
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <button type="button" onclick="switchTab('home')" class="font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">
+                      Beranda &amp; 4. Galeri &amp; File
+                    </button>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                    Logo utama aplikasi pada header, favicon, hero brand mark, kartu biografi, dan galeri media.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold break-all text-slate-900 dark:text-white">
+                    Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <button type="button" onclick="switchTab('galeri')" class="font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">
+                      Beranda &amp; 4. Galeri &amp; File
+                    </button>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                    Aset gambar ilustrasi pendukung pada pratinjau beranda dan galeri aset media.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 py-5 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <img
+            src="21768153_2010541769182048_3982694849959358174_n_2.jpg"
+            alt="Logo Al-Mubarah / NW"
+            class="w-5 h-5 rounded-md object-cover"
+            onerror="handleImageFallback(this, 'NW')"
+          />
+          <span class="font-semibold text-emerald-900 dark:text-emerald-300">
+            Al-Mubarah / Nahdlatul Wathan Digital
+          </span>
+        </div>
+        <p>
+          Lestari Keilmuan, Amaliah &amp; Dakwah • Tampilan Nyaman di Mobile &amp; Desktop
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== JAVASCRIPT APLIKASI ==================== -->
+  <script>
+    // Data Qira'atush Shalawat As-Sitt (6 Shalawat dalam Hizib NW)
+    const SHALAWAT_AS_SITT = [
+      {
+        id: 'shalawat-nahdlatain',
+        title: '1. Shalatun Nahdlatain',
+        tag: 'Pembuka & Syiar NW',
+        arabic:
+          'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُحْيِي بِهَا نَهْضَةَ الْوَطَنِ وَنَهْضَةَ الْبَنَاتِ وَتُحَقِّقُ بِهَا آمَالَنَا فِي الدُّنْيَا وَالْآخِرَةِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ',
+        note: 'Shalawat khas yang menyertai semangat kebangkitan pendidikan dan dakwah Nahdlatul Wathan.',
+      },
+      {
+        id: 'shalawatul-fatih',
+        title: '2. Shalawatul Fatih',
+        tag: 'Pembuka Kebaikan',
+        arabic:
+          'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ الْفَاتِحِ لِمَا أُغْلِقَ وَالْخَاتِمِ لِمَا سَبَقَ نَاصِرِ الْحَقِّ بِالْحَقِّ وَالْهَادِي إِلَى صِرَاطِكَ الْمُسْتَقِيمِ وَعَلَى آلِهِ حَقَّ قَدْرِهِ وَمِقْدَارِهِ الْعَظِيمِ',
+        note: 'Memohon dibukakannya pintu-pintu kebaikan, petunjuk, dan pertolongan kebenaran.',
+      },
+      {
+        id: 'shalawatun-nariyah',
+        title: '3. Ash-Shalatun Nariyah (Tafrijiyyah)',
+        tag: 'Pelepas Kesulitan',
+        arabic:
+          'اللَّهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِي تَنْحَلُّ بِهِ الْعُقَدُ وَتَنْفَرِجُ بِهِ الْكُرَبُ وَتُقْضَى بِهِ الْحَوَائِجُ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيمِ',
+        note: 'Dibaca untuk memohon terurainya ikatan kesulitan, tercapainya hajat, dan husnul khatimah.',
+      },
+      {
+        id: 'shalawatut-thib',
+        title: '4. Shalatut Thib (Tibbil Qulub)',
+        tag: 'Penyembuh Lahir Batin',
+        arabic:
+          'اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ طِبِّ الْقُلُوبِ وَدَوَائِهَا وَعَافِيَةِ الْأَبْدَانِ وَشِفَائِهَا وَنُورِ الْأَبْصَارِ وَضِيَائِهَا وَقُوتِ الْأَرْوَاحِ وَغِذَائِهَا وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ',
+        note: 'Shalawat memohon obat hati, kesehatan badan, cahaya penglihatan, dan kekuatan ruhani.',
+      },
+      {
+        id: 'shalawatul-aliyyil-qadr',
+        title: '5. Shalawatul \u2018Aliyyil Qadr',
+        tag: 'Kemuliaan & Kedudukan',
+        arabic:
+          'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ النَّبِيِّ الْأُمِّيِّ الْحَبِيبِ الْعَالِي الْقَدْرِ الْعَظِيمِ الْجَاهِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ',
+        note: 'Mengagungkan kedudukan Nabi Muhammad SAW yang mulia di sisi Allah SWT.',
+      },
+      {
+        id: 'shalawat-miftahi-babir-rahmatillah',
+        title: '6. Shalawat Miftahi Babir Rahmatillah',
+        tag: 'Pembuka Pintu Rahmat',
+        arabic:
+          'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ مِفْتَاحِ بَابِ رَحْمَةِ اللَّهِ عَدَدَ مَا فِي عِلْمِ اللَّهِ صَلَاةً وَسَلَامًا دَائِمَيْنِ بِدَوَامِ مُلْكِ اللَّهِ',
+        note: 'Shalawat pembuka pintu rahmat Allah yang abadi sepanjang kekekalan kerajaan-Nya.',
+      },
+    ];
+
+    // Data Kitab Al-Barzanji, Mahallul Qiyam, Kumpulan Qasidah & Fihrisul Kitab
+    const BARZANJI_AND_QASIDAH_ITEMS = [
+      {
+        id: 'bz-fatihah-nahdlatain',
+        category: 'Pembuka Kitab',
+        title: 'Qira\u2019atul Fatihah & Shalatun Nahdlatain',
+        subtitle: 'Pembuka majelis sebelum pembacaan Maulid Al-Barzanji',
+        arabic:
+          'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • الْفَاتِحَة • اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُحْيِي بِهَا نَهْضَةَ الْوَطَنِ وَنَهْضَةَ الْبَنَاتِ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ',
+        description:
+          'Diawali dengan bacaan Al-Fatihah sebagai tawassul dan pembuka keberkahan majelis, dilanjutkan dengan Shalatun Nahdlatain.',
+      },
+      {
+        id: 'bz-maulid-barzanji',
+        category: 'Maulid Al-Barzanji',
+        title: 'Bait-Bait Syair Maulid Al-Barzanji',
+        subtitle: 'Untaian pujian, nasab mulia, dan kisah kelahiran Nabi Muhammad SAW',
+        arabic:
+          'أَبْتَدِئُ الْإِمْلَاءَ بِاسْمِ الذَّاتِ الْعَلِيَّةِ، مُسْتَدِرًّا فَيْضَ الْبَرَكَاتِ عَلَى مَا أَنَالَهُ وَأَوْلَاهُ • هُوَ سَيِّدُنَا مُحَمَّدُ بْنُ عَبْدِ اللَّهِ بْنِ عَبْدِ الْمُطَّلِبِ',
+        description:
+          'Rangkaian nazham dan prosa pujian karya Syeikh Ja\u2019far al-Barzanji yang menuturkan kemuliaan nasab, tanda-tanda kenabian, serta akhlak agung Baginda Rasulullah SAW.',
+      },
+      {
+        id: 'bz-mahallul-qiyam',
+        category: 'Mahallul Qiyam',
+        title: 'Mahallul Qiyam (Ya Nabi Salam \u2018Alaika)',
+        subtitle: 'Bacaan berdiri penuh takzim menyambut kelahiran & keagungan Rasulullah SAW',
+        arabic:
+          'يَا نَبِي سَلَامٌ عَلَيْكَ ۝ يَا رَسُولَ سَلَامٌ عَلَيْكَ ۝ يَا حَبِيبَ سَلَامٌ عَلَيْكَ ۝ صَلَوَاتُ اللَّهِ عَلَيْكَ ۝ أَشْرَقَ الْبَدْرُ عَلَيْنَا ۝ فَاخْتَفَتْ مِنْهُ الْبُدُورُ',
+        description:
+          'Dibaca ketika jamaah berdiri dengan penuh penghormatan dan cinta kepada Nabi Muhammad SAW (Asyraqal Badru \u2018Alaina, Ya Nabi Salam \u2018Alaika).',
+      },
+      {
+        id: 'bz-ad-dua',
+        category: 'Doa Penutup Maulid',
+        title: 'Ad-Du\u2019a (Doa Maulid Al-Barzanji)',
+        subtitle: 'Doa permohonan rahmat, keselamatan, dan syafaat',
+        arabic:
+          'اللَّهُمَّ بِحَقِّ الْمُصْطَفَى وَبِآلِهِ وَصَحْبِهِ الْكِرَامِ، أَصْلِحْ لَنَا شَأْنَنَا كُلَّهُ وَلَا تَكِلْنَا إِلَى أَنْفُسِنَا طَرْفَةَ عَيْنٍ وَلَا أَقَلَّ مِنْ ذَلِكَ',
+        description:
+          'Doa penutup rangkaian pembacaan Maulid Al-Barzanji untuk memohon kebaikan dunia dan akhirat.',
+      },
+      {
+        id: 'q-badriyyah',
+        category: 'Qasidah & Shalawat',
+        title: 'Ash-Shalawatul Badriyyah',
+        subtitle: 'Shalawat tawassul Ahlul Badar',
+        arabic:
+          'صَلَاةُ اللَّهِ سَلَامُ اللَّهِ ۝ عَلَى طٰهَ رَسُولِ اللَّهِ ۝ صَلَاةُ اللَّهِ سَلَامُ اللَّهِ ۝ عَلَى يٰسٓ حَبِيبِ اللَّهِ',
+        description: 'Qasidah shalawat populer yang menyebut kemuliaan Rasulullah SAW dan para sahabat ahli Badar.',
+      },
+      {
+        id: 'q-ya-rabbi-shalli',
+        category: 'Qasidah & Shalawat',
+        title: 'Ya Rabbi Shalli \u2018Ala Muhammad',
+        subtitle: 'Qasidah pujian dan permohonan syafaat',
+        arabic:
+          'يَا رَبِّ صَلِّ عَلَى مُحَمَّدٍ ۝ يَا رَبِّ بَلِّغْهُ الْوَسِيلَةَ ۝ يَا رَبِّ خُصَّهُ بِالْفَضِيلَةَ ۝ يَا رَبِّ وَارْضَ عَنِ الصَّحَابَةَ',
+        description: 'Qasidah permohonan shalawat, kedudukan Al-Wasilah, dan keridhaan atas para sahabat.',
+      },
+      {
+        id: 'q-assalamu-alaik',
+        category: 'Qasidah & Shalawat',
+        title: 'Assalamu \u2018Alaik',
+        subtitle: 'Salam rindu kepada Rasulullah SAW',
+        arabic:
+          'السَّلَامُ عَلَيْكَ زَيْنَ الْأَنْبِيَاءِ ۝ السَّلَامُ عَلَيْكَ أَتْقَى الْأَتْقِيَاءِ ۝ السَّلَامُ عَلَيْكَ أَصْفَى الْأَصْفِيَاءِ',
+        description: 'Untaian salam penghormatan kepada Nabi Muhammad SAW sebagai hiasan para nabi dan kekasih Allah.',
+      },
+      {
+        id: 'q-nuurul-mushthofa',
+        category: 'Qasidah & Shalawat',
+        title: 'Nuurul Mushthofa',
+        subtitle: 'Cahaya pilihan yang menerangi alam',
+        arabic:
+          'نُورُ الْمُصْطَفَى مَلَأَ الْأَكْوَانَ ۝ وَأَزَالَ الْهَمَّ عَنِ الْإِنْسَانِ ۝ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ',
+        description: 'Qasidah tentang cahaya Rasulullah SAW yang membawa ketenteraman bagi semesta.',
+      },
+      {
+        id: 'q-ya-thaybah',
+        category: 'Qasidah & Shalawat',
+        title: 'Ya Thaybah',
+        subtitle: 'Rindu kota suci Madinah Al-Munawwarah',
+        arabic:
+          'يَا طَيْبَةُ يَا طَيْبَةُ يَا دَوَاءَ الْعَيَانَا ۝ اشْتَقْنَا لَكِ وَالْهَوَى نَادَانَا',
+        description: 'Syair kerinduan kepada Thaybah (Madinah) dan makam mulia Rasulullah SAW.',
+      },
+      {
+        id: 'q-khoirol-bariyyah',
+        category: 'Qasidah & Shalawat',
+        title: 'Khoirol Bariyyah',
+        subtitle: 'Sebaik-baik makhluk ciptaan Allah',
+        arabic:
+          'خَيْرَ الْبَرِيَّةِ نَظْرَةٌ إِلَيَّ ۝ مَا أَنْتَ إِلَّا كَنْزُ الْعَطِيَّةِ',
+        description: 'Qasidah yang memuji keutamaan Nabi Muhammad SAW sebagai sebaik-baik makhluk.',
+      },
+      {
+        id: 'q-alfu-shollallah',
+        category: 'Qasidah & Shalawat',
+        title: 'Alfu Shollallah',
+        subtitle: 'Seribu shalawat dan salam untuk sang pembawa hidayah',
+        arabic:
+          'أَلْفُ صَلَّى اللَّهُ عَلَى مَنْ ۝ بِالْقُرْآنِ الْحَقِّ تَرَنَّمْ',
+        description: 'Qasidah shalawat berirama semangat dan kecintaan kepada Rasulullah SAW.',
+      },
+      {
+        id: 'q-al-madad-ya-rasulullah',
+        category: 'Qasidah & Shalawat',
+        title: 'Al-Madad Ya Rasulullah',
+        subtitle: 'Permohonan madad, pertolongan keberkahan & syafaat',
+        arabic:
+          'الْمَدَدْ يَا رَسُولَ اللَّهِ ۝ الْمَدَدْ يَا حَبِيبَ اللَّهِ ۝ فَهُوَ عِمَادِي يَوْمَ الْمَعَادِ',
+        description: 'Qasidah tawassul dan harapan syafaat Rasulullah SAW di hari kiamat.',
+      },
+      {
+        id: 'q-ghuraba',
+        category: 'Qasidah & Shalawat',
+        title: 'Ghuraba',
+        subtitle: 'Senandung perenungan dan kerinduan ruhani',
+        arabic:
+          'غُرَبَاءُ وَفِي الدُّنْيَا نَسِيرُ ۝ وَإِلَى اللَّهِ تَعَالَى الْمَصِيرُ',
+        description: 'Syair perenungan perjalanan hidup hamba di dunia menuju perjumpaan dengan Allah SWT.',
+      },
+      {
+        id: 'q-hayatul-ruh',
+        category: 'Qasidah & Shalawat',
+        title: 'Hayatul Ruh',
+        subtitle: 'Kehidupan ruhani dalam dzikir dan mahabbah',
+        arabic:
+          'بِذِكْرِ اللَّهِ تَحْيَا الْقُلُوبُ ۝ وَبِحُبِّ الْمُصْطَفَى تَزُولُ الْكُرُوبُ',
+        description: 'Qasidah tentang hidupnya hati melalui dzikir kepada Allah dan cinta kepada Rasulullah SAW.',
+      },
+      {
+        id: 'q-syaikhona',
+        category: 'Qasidah & Shalawat',
+        title: 'Syaikhona',
+        subtitle: 'Takzim dan doa kepada guru-guru mulia',
+        arabic:
+          'شَيْخُنَا يَا شَيْخُنَا ۝ أَنْتَ لَنَا أُسْوَةٌ وَقُدْوَةٌ',
+        description: 'Qasidah penghormatan dan doa keberkahan bagi para guru dan masyaikh pembimbing.',
+      },
+      {
+        id: 'q-ad-diinu-lana',
+        category: 'Qasidah & Shalawat',
+        title: 'Ad-Diinu Lana',
+        subtitle: 'Kebanggaan atas agama Islam dan perjuangan',
+        arabic:
+          'الدِّينُ لَنَا وَالْحَقُّ لَنَا ۝ وَالْعَدْلُ لَنَا وَالْكُلُّ لَنَا',
+        description: 'Qasidah penuh semangat menjaga agama, kebenaran, keadilan, dan persaudaraan.',
+      },
+      {
+        id: 'q-ya-syahidan',
+        category: 'Qasidah & Shalawat',
+        title: 'Ya Syahidan',
+        subtitle: 'Peringatan para syuhada dan pejuang kebenaran',
+        arabic:
+          'يَا شَهِيدًا قَدْ حَيِيتَ ۝ فِي جِنَانِ الْخُلْدِ دُمْتَ',
+        description: 'Qasidah penghormatan atas keteguhan para syuhada dan pejuang di jalan Allah.',
+      },
+      {
+        id: 'q-ya-khoiro-maulud',
+        category: 'Qasidah & Shalawat',
+        title: 'Ya Khoiro Maulud',
+        subtitle: 'Sambutan atas kelahiran makhluk termulia',
+        arabic:
+          'يَا خَيْرَ مَوْلُودٍ فِي الْكَوْنِ ۝ أَهْلًا بِكَ يَا نُورَ الْعَيْنِ',
+        description: 'Qasidah sukacita atas kelahiran Nabi Muhammad SAW sebagai rahmat bagi semesta.',
+      },
+      {
+        id: 'q-tholaal-badru',
+        category: 'Qasidah & Shalawat',
+        title: 'Thola\u2019al Badru \u2018Alaina',
+        subtitle: 'Syair penyambutan penuh cahaya',
+        arabic:
+          'طَلَعَ الْبَدْرُ عَلَيْنَا ۝ مِنْ ثَنِيَّاتِ الْوَدَاعِ ۝ وَجَبَ الشُّكْرُ عَلَيْنَا ۝ مَا دَعَا لِلَّهِ دَاعٍ',
+        description: 'Qasidah klasik yang melambangkan datangnya cahaya petunjuk dan rasa syukur.',
+      },
+      {
+        id: 'q-sholatun-bissalamil-mubin',
+        category: 'Qasidah & Shalawat',
+        title: 'Sholatun Bissalamil Mubin',
+        subtitle: 'Shalawat dengan salam yang nyata',
+        arabic:
+          'صَلَاةٌ بِالسَّلَامِ الْمُبِينِ ۝ لِنُقْطَةِ التَّعْيِينِ يَا مُغْرَمِينَ',
+        description: 'Qasidah shalawat bernuansa mahabbah dan ketenangan hati.',
+      },
+      {
+        id: 'q-asadul-ayyam',
+        category: 'Qasidah & Shalawat',
+        title: 'As\u2019adul Ayyam',
+        subtitle: 'Hari-hari paling bahagia bersama majelis shalawat',
+        arabic:
+          'هَذَا يَوْمٌ سَعِيدٌ مُبَارَكٌ ۝ فِي ذِكْرِ الْمُصْطَفَى الْمُمَجَّدِ',
+        description: 'Qasidah tentang keberkahan hari dan majelis yang menghidupkan dzikir serta shalawat.',
+      },
+      {
+        id: 'q-ya-habibal-qolbi',
+        category: 'Qasidah & Shalawat',
+        title: 'Ya Habibal Qolbi',
+        subtitle: 'Wahai kekasih hati yang selalu dirindukan',
+        arabic:
+          'يَا حَبِيبَ الْقَلْبِ يَا خَيْرَ الْأَنَامِ ۝ مِثْلُكَ فِي الْكَوْنِ مَا رَأَتِ الْأَنَامُ',
+        description: 'Qasidah kecintaan dan kerinduan mendalam kepada Nabi Muhammad SAW.',
+      },
+      {
+        id: 'q-innal-habibal-mushthofa',
+        category: 'Qasidah & Shalawat',
+        title: 'Innal Habibal Mushthofa',
+        subtitle: 'Sesungguhnya Al-Habib Al-Mushthofa adalah penghapus duka',
+        arabic:
+          'إِنَّ الْحَبِيبَ الْمُصْطَفَى ۝ ذُو رَأْفَةٍ وَذُو وَفَا',
+        description: 'Qasidah yang menggambarkan kelembutan, kasih sayang, dan kesetiaan Rasulullah SAW.',
+      },
+      {
+        id: 'q-burdah-asmaul-husna-qiyam-pusaka',
+        category: 'Burdah, Asmaul Husna, Qiyam & Doa Pusaka',
+        title: 'Qoshidah Burdah, Asmaul Husna, Qiyam & Doa Pusaka',
+        subtitle: 'Rangkaian syair Burdah, Asmaul Husna, Qiyam, dan Doa Pusaka NW',
+        arabic:
+          'مَوْلَايَ صَلِّ وَسَلِّمْ دَائِمًا أَبَدًا ۝ عَلَى حَبِيبِكَ خَيْرِ الْخَلْقِ كُلِّهِمِ • وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا • اللَّهُمَّ انْفَعْنَا بِمَا عَلَّمْتَنَا',
+        description:
+          'Memadukan bait Qashidah Burdah, dzikir Asmaul Husna, Qiyam, serta Doa Pusaka yang memohon keberkahan ilmu, keluarga, dan perjuangan.',
+      },
+    ];
+
+    // State aplikasi
+    const state = {
+      activeTab: 'home',
+      arabicSize: 'md',
+      darkMode: false,
+      tasbihCount: 0,
+      tasbihLabel: 'Ulangan Bebas / 3x (Tsalatsan)',
+      barzanjiFilter: '',
+    };
+
+    // Menampilkan pesan toast sementara (pengganti alert)
+    let toastTimeout = null;
+    function showToast(message) {
+      const box = document.getElementById('toast-box');
+      const text = document.getElementById('toast-message');
+      if (!box || !text) return;
+      text.textContent = message;
+      box.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 2800);
+    }
+
+    // Fallback aman bila gambar lampiran tidak ditemukan di lingkungan pratinjau
+    function handleImageFallback(imgEl, labelText) {
+      if (!imgEl || imgEl.dataset.fallbackApplied === 'true') return;
+      imgEl.dataset.fallbackApplied = 'true';
+      const encoded = encodeURIComponent(labelText || 'Al-Mubarah / NW');
+      imgEl.src = `https://placehold.co/600x400/064e3b/fbbf24?text=${encoded}`;
+    }
+
+    // Mengganti tab aktif
+    function switchTab(tabName) {
+      state.activeTab = tabName;
+      const panels = document.querySelectorAll('.tab-panel');
+      panels.forEach((panel) => {
+        if (panel.id === `tab-${tabName}`) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+
+      const buttons = document.querySelectorAll('.nav-tab-btn');
+      buttons.forEach((btn) => {
+        const isCurrent = btn.getAttribute('data-tab') === tabName;
+        if (isCurrent) {
+          btn.className =
+            'nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5 bg-emerald-700 text-white shadow-xs';
+        } else {
+          btn.className =
+            'nav-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-slate-800';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Mengatur ukuran huruf Arab (sm / md / lg)
+    function setArabicFontSize(size) {
+      state.arabicSize = size;
+      const root = document.getElementById('app-root');
+      if (!root) return;
+      root.classList.remove('arabic-size-sm', 'arabic-size-md', 'arabic-size-lg');
+      root.classList.add(`arabic-size-${size}`);
+
+      ['sm', 'md', 'lg'].forEach((s) => {
+        const btn = document.getElementById(`font-btn-${s}`);
+        if (!btn) return;
+        if (s === size) {
+          btn.className =
+            'px-2 py-1 text-xs font-semibold rounded-lg bg-emerald-700 text-white shadow-xs transition';
+        } else {
+          btn.className =
+            'px-2 py-1 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition';
+        }
+      });
+
+      const labelMap = { sm: 'Kecil', md: 'Sedang', lg: 'Besar' };
+      showToast(`Ukuran huruf Arab: ${labelMap[size]}`);
+    }
+
+    // Mengatur Dark Mode / Light Mode
+    function applyDarkMode(isDark) {
+      state.darkMode = isDark;
+      const htmlEl = document.documentElement;
+      const moonIcon = document.getElementById('icon-moon');
+      const sunIcon = document.getElementById('icon-sun');
+
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        moonIcon?.classList.add('hidden');
+        sunIcon?.classList.remove('hidden');
+      } else {
+        htmlEl.classList.remove('dark');
+        moonIcon?.classList.remove('hidden');
+        sunIcon?.classList.add('hidden');
+      }
+    }
+
+    function toggleDarkMode() {
+      applyDarkMode(!state.darkMode);
+      showToast(state.darkMode ? 'Mode Gelap aktif' : 'Mode Terang aktif');
+    }
+
+    // Fungsi Penghitung Tasbih / Ulangan Bacaan
+    function renderTasbih() {
+      const countEl = document.getElementById('tasbih-count');
+      const labelEl = document.getElementById('tasbih-label');
+      if (countEl) countEl.textContent = String(state.tasbihCount);
+      if (labelEl) labelEl.textContent = state.tasbihLabel;
+    }
+
+    function incrementTasbih() {
+      state.tasbihCount += 1;
+      renderTasbih();
+      if (state.tasbihCount === 3) {
+        showToast(' Tercapai 3x (Tsalatsan)');
+      }
+    }
+
+    function decrementTasbih() {
+      if (state.tasbihCount > 0) {
+        state.tasbihCount -= 1;
+        renderTasbih();
+      }
+    }
+
+    function resetTasbih() {
+      state.tasbihCount = 0;
+      state.tasbihLabel = 'Ulangan Bebas / 3x (Tsalatsan)';
+      renderTasbih();
+      showToast('Penghitung bacaan direset ke 0');
+    }
+
+    function setTasbihTarget(count, label) {
+      state.tasbihCount = count;
+      state.tasbihLabel = label;
+      renderTasbih();
+      showToast(`Tasbih diset: ${label}`);
+    }
+
+    // Menyalin teks bagian ke clipboard dengan fallback execCommand
+    function copySectionText(elementId, label) {
+      try {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        const textToCopy = el.innerText.trim();
+        const tempTextArea = document.createElement('textarea');
+        tempTextArea.value = textToCopy;
+        tempTextArea.setAttribute('readonly', '');
+        tempTextArea.style.position = 'absolute';
+        tempTextArea.style.left = '-9999px';
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+        showToast(`${label} berhasil disalin`);
+      } catch (err) {
+        showToast('Tidak dapat menyalin teks pada perangkat ini');
+      }
+    }
+
+    // Render Qira'atush Shalawat As-Sitt
+    function renderShalawatAsSitt() {
+      const container = document.getElementById('shalawat-as-sitt-list');
+      if (!container) return;
+
+      container.innerHTML = SHALAWAT_AS_SITT.map(
+        (item) => `
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">${item.title}</h3>
+                <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">
+                  ${item.tag}
+                </span>
+              </div>
+              <p class="arabic-text text-emerald-950 dark:text-emerald-100">${item.arabic}</p>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 pt-2 border-t border-slate-200/70 dark:border-slate-800">
+              ${item.note}
+            </p>
+          </div>
+        `
+      ).join('');
+    }
+
+    // Render Kitab Al-Barzanji, Mahallul Qiyam, Qasidah & Fihrisul Kitab
+    function renderBarzanjiAndQasidah() {
+      const quickNav = document.getElementById('barzanji-quick-nav');
+      const container = document.getElementById('barzanji-items-container');
+      const fihrisGrid = document.getElementById('fihris-grid');
+      if (!container) return;
+
+      const query = state.barzanjiFilter.trim().toLowerCase();
+      const filtered = BARZANJI_AND_QASIDAH_ITEMS.filter((item) => {
+        if (!query) return true;
+        return (
+          item.title.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query) ||
+          item.subtitle.toLowerCase().includes(query) ||
+          item.description.toLowerCase().includes(query)
+        );
+      });
+
+      if (quickNav) {
+        quickNav.innerHTML = BARZANJI_AND_QASIDAH_ITEMS.map(
+          (item) => `
+            <a
+              href="#${item.id}"
+              class="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-slate-700 dark:text-slate-200 transition"
+            >
+              ${item.title.replace(/^\d+\.\s*/, '')}
+            </a>
+          `
+        ).join('') +
+          `<a href="#fihrisul-kitab" class="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-300 hover:bg-amber-200 transition">Fihrisul Kitab</a>`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 text-center text-sm text-slate-500 dark:text-slate-400">
+            Tidak ditemukan bagian atau qasidah dengan kata kunci &ldquo;${state.barzanjiFilter}&rdquo;.
+          </div>
+        `;
+      } else {
+        container.innerHTML = filtered
+          .map(
+            (item) => `
+              <article
+                id="${item.id}"
+                class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card p-5 sm:p-7 space-y-3"
+              >
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                      ${item.category}
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+                      ${item.title}
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${item.subtitle}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onclick="incrementTasbih()"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
+                  >
+                    + Tasbih Bacaan
+                  </button>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/70 dark:border-slate-800">
+                  <p class="arabic-text text-emerald-950 dark:text-emerald-100">${item.arabic}</p>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  ${item.description}
+                </p>
+              </article>
+            `
+          )
+          .join('');
+      }
+
+      if (fihrisGrid) {
+        fihrisGrid.innerHTML = BARZANJI_AND_QASIDAH_ITEMS.map(
+          (item, idx) => `
+            <a
+              href="#${item.id}"
+              class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-slate-200/70 dark:border-slate-800 text-xs sm:text-sm transition"
+            >
+              <span class="font-semibold text-slate-800 dark:text-slate-200 truncate pr-2">
+                ${idx + 1}. ${item.title}
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 shrink-0">
+                Buka &rarr;
+              </span>
+            </a>
+          `
+        ).join('');
+      }
+    }
+
+    function filterBarzanjiItems(value) {
+      state.barzanjiFilter = value || '';
+      renderBarzanjiAndQasidah();
+    }
+
+    // Pencarian cepat lintas bagian (Biografi, Hizib NW, Barzanji & Qasidah, Galeri & File)
+    const SEARCH_INDEX = [
+      {
+        tab: 'biografi',
+        badge: 'Biografi',
+        title: 'Al-Ustadz Abu Shulhi — Pendiri TPQ Al Mubarah',
+        excerpt: 'Pendidikan di Pondok Pesantren Nurul Iman (Mamben Lauk), TGH. Khairuddin, Ust. H. Marzuki Khair An-Nahdly, TGH. M. Amin, TGH. M. Sholeh, serta YPH PPD NWDI Pancor di bawah Maulana Syeikh TGKH. M. Zainuddin Abdul Madjid.',
+      },
+      {
+        tab: 'biografi',
+        badge: 'Biografi',
+        title: 'Pengabdian di Desa Tembeng Putik & Desa Teko (Pringgabaya)',
+        excerpt: 'Mengajar di madrasah, mushalla, pengajian keliling di Desa Tembeng Putik, mengajar pertama kali di Desa Teko Kec. Pringgabaya dengan berjalan kaki, menulis kitab tangan sendiri, dan mengajar nahwu, sharaf, balaghah, fiqh, serta tajwid.',
+      },
+      {
+        tab: 'hizib',
+        badge: 'Hizib NW',
+        title: 'Sambutan Penerbit & Wasiat Renungan Masa',
+        excerpt: 'Maulana Syeikh TGKH. Muhammad Zainuddin Abdul Majid, Pengurus Besar Nahdlatul Wathan, Pancor Selong Lombok Timur NTB — "Sebarkanlah Hizib Hingga Merata...".',
+      },
+      {
+        tab: 'hizib',
+        badge: 'Hizib NW',
+        title: 'Miftah / Qira\u2019atul Fatihah (a, b, c) & Surah Yasin',
+        excerpt: 'Pembuka Fatihah (a, b, c) dan ayat-ayat pilihan Surah Yasin serta Ikhtisharu Hizbi Nahdlatil Wathan dan doa-doa.',
+      },
+      {
+        tab: 'hizib',
+        badge: 'Hizib NW',
+        title: 'Qira\u2019atush Shalawat As-Sitt',
+        excerpt: 'Shalatun Nahdlatain, Shalawatul Fatih, Ash-Shalatun Nariyah, Shalatut Thib, Shalawatul \u2018Aliyyil Qadr, dan Shalawat Miftahi Babir Rahmatillah.',
+      },
+      ...BARZANJI_AND_QASIDAH_ITEMS.map((item) => ({
+        tab: 'barzanji',
+        badge: item.category,
+        title: item.title,
+        excerpt: `${item.subtitle} — ${item.description}`,
+      })),
+      {
+        tab: 'galeri',
+        badge: 'Galeri & File',
+        title: 'Aset Gambar & Pemetaan Seluruh File Lampiran',
+        excerpt: '21768153_2010541769182048_3982694849959358174_n_2.jpg, Gemini_Generated_Image_yi7hd5yi7hd5yi7h_2.jpg, BIOGRAFI SINGKAT_2.docx, HIZIB Nahdlatul Wathan_2.pdf, Albarzanji_2.pdf.',
+      },
+    ];
+
+    function handleGlobalSearch(rawQuery) {
+      const q = (rawQuery || '').trim();
+      const desktopInput = document.getElementById('global-search-desktop');
+      const mobileInput = document.getElementById('global-search-mobile');
+      const clearDesktop = document.getElementById('clear-search-desktop');
+      const clearMobile = document.getElementById('clear-search-mobile');
+      const panel = document.getElementById('search-results-panel');
+      const summary = document.getElementById('search-summary-text');
+      const list = document.getElementById('search-results-list');
+
+      if (desktopInput && desktopInput.value !== rawQuery) desktopInput.value = rawQuery;
+      if (mobileInput && mobileInput.value !== rawQuery) mobileInput.value = rawQuery;
+
+      const hasQuery = q.length > 0;
+      clearDesktop?.classList.toggle('hidden', !hasQuery);
+      clearDesktop?.classList.toggle('flex', hasQuery);
+      clearMobile?.classList.toggle('hidden', !hasQuery);
+      clearMobile?.classList.toggle('flex', hasQuery);
+
+      if (!hasQuery || !panel || !summary || !list) {
+        panel?.classList.add('hidden');
+        return;
+      }
+
+      const lower = q.toLowerCase();
+      const matches = SEARCH_INDEX.filter(
+        (entry) =>
+          entry.title.toLowerCase().includes(lower) ||
+          entry.badge.toLowerCase().includes(lower) ||
+          entry.excerpt.toLowerCase().includes(lower)
+      );
+
+      panel.classList.remove('hidden');
+      summary.textContent = `Ditemukan ${matches.length} hasil untuk kata kunci "${q}".`;
+
+      if (matches.length === 0) {
+        list.innerHTML = `
+          <div class="col-span-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 text-sm text-slate-500 dark:text-slate-400">
+            Tidak ada bagian yang cocok dengan pencarian tersebut. Coba kata kunci seperti "Abu Shulhi", "Teko", "Yasin", "Shalawat", "Mahallul Qiyam", atau "Badriyyah".
+          </div>
+        `;
+      } else {
+        list.innerHTML = matches
+          .map(
+            (m) => `
+              <button
+                type="button"
+                onclick="openSearchMatch('${m.tab}')"
+                class="text-left p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-slate-200/80 dark:border-slate-800 transition space-y-1.5"
+              >
+                <span class="inline-block text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">
+                  ${m.badge}
+                </span>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white">${m.title}</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">${m.excerpt}</p>
+              </button>
+            `
+          )
+          .join('');
+      }
+    }
+
+    function openSearchMatch(tabName) {
+      switchTab(tabName);
+    }
+
+    function clearGlobalSearch() {
+      handleGlobalSearch('');
+    }
+
+    // Inisialisasi aplikasi saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const prefersDark =
+          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyDarkMode(prefersDark);
+        renderTasbih();
+        renderShalawatAsSitt();
+        renderBarzanjiAndQasidah();
+        switchTab('home');
+      } catch (error) {
+        showToast('Terjadi kendala saat memuat antarmuka');
+      }
+    });
+  </script>
+</body>
+</html>
